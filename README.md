@@ -160,18 +160,13 @@ Important beginner note:
 
 - Registering a user in the database does not log you in
 - The current code does not connect registered users to Spring Security authentication
-- If no custom user is configured, Spring Boot usually creates a default user named `user` and prints a generated password in the startup logs
 
 For testing protected endpoints, check the console output after startup for a line similar to:
 
-```text
-Using generated security password: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-```
-
 Then use:
 
-- username: `user`
-- password: the generated password from the console
+- username: `het`
+- password: `het123`
 
 ## Recommended Beginner Test Flow
 
@@ -187,7 +182,9 @@ Test the app in this order:
 
 ### Users
 
-`POST /users/register`
+```
+POST /users/register
+```
 
 - Public endpoint
 - Creates a new user
@@ -217,18 +214,21 @@ Example request body:
   "name": "Rutvi",
   "email": "rutvi@gmail.com",
   "password": "123",
-  "role": "ROLE_USER"
+  "role": "ROLE_USER",
 }
 ```
 
-`GET /users`
-
+```
+GET /users
+```
 - Protected endpoint
 - Returns all users
 
 ### Groups
 
-`POST /groups`
+```
+POST /groups
+```
 
 - Protected endpoint
 - Creates a group
@@ -241,7 +241,9 @@ Example request body:
 }
 ```
 
-`POST /groups/{groupId}/users`
+```
+POST /groups/{groupId}/users
+```
 
 - Protected endpoint
 - Sets group members using a list of user IDs
@@ -252,14 +254,18 @@ Example request body:
 [1, 2, 3]
 ```
 
-`GET /groups`
+```
+GET /groups
+```
 
 - Protected endpoint
 - Returns all groups
 
 ### Expenses
 
-`POST /expenses`
+```
+POST /expenses
+```
 
 - Protected endpoint
 - Creates an expense and automatically creates split rows
@@ -284,17 +290,23 @@ Example request body:
 }
 ```
 
-`GET /expenses/group/{groupId}`
+```
+GET /expenses/group/{groupId}
+```
 
 - Protected endpoint
 - Returns all expenses for a group
 
-`GET /expenses/settlements/{groupId}`
+```
+GET /expenses/settlements/{groupId}
+```
 
 - Protected endpoint
 - Returns final settlement instructions for the group
 
-`PUT /expenses/{expenseId}`
+```
+PUT /expenses/{expenseId}
+```
 
 - Protected endpoint
 - Updates an expense and rebuilds its split rows
@@ -309,7 +321,9 @@ Example request body:
 }
 ```
 
-`DELETE /expenses/{expenseId}`
+```
+DELETE /expenses/{expenseId}
+```
 
 - Protected endpoint
 - Deletes the expense and its related split rows
